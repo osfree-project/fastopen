@@ -17,14 +17,13 @@ JWASM = 1
 !include $(%ROOT)tools/mk/appsdos.mk
 !include $(MYDIR)fastopen.mk
 
-ADD_COPT = -i=$(PORT_BASE)v4.0$(SEP)src$(SEP)H
-ADD_ASMOPT = -Zm -Zg -I=$(PORT_BASE)v4.0$(SEP)src$(SEP)INC
+ADD_COPT = -i=$(PORT_BASE)v4.0$(SEP)src$(SEP)h
+ADD_ASMOPT = -Zm -Zg -I=$(PORT_BASE)v4.0$(SEP)src$(SEP)inc
 ADD_LINKOPT = op nocase
 
-.c: $(PORT_BASE)v4.0$(SEP)src$(SEP)CMD$(SEP)FASTOPEN
-.asm: $(PORT_BASE)v4.0$(SEP)src$(SEP)CMD$(SEP)FASTOPEN
+.c: $(PORT_BASE)v4.0$(SEP)src$(SEP)cmd$(SEP)fastopen
+.asm: $(PORT_BASE)v4.0$(SEP)src$(SEP)cmd$(SEP)fastopen
 
-.h: $(PORT_BASE)v4.0$(SEP)src$(SEP)CMD$(SEP)FASTOPEN
-.h: $(PORT_BASE)v4.0$(SEP)src$(SEP)H
-.inc: $(PORT_BASE)v4.0$(SEP)src$(SEP)INC
-
+.h: $(PORT_BASE)v4.0$(SEP)src$(SEP)cmd$(SEP)fastopen
+.h: $(PORT_BASE)v4.0$(SEP)src$(SEP)h
+.inc: $(PORT_BASE)v4.0$(SEP)src$(SEP)inc

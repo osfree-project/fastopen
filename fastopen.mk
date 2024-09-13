@@ -3,6 +3,6 @@ PORT_NAME = win16$(SEP)fastopen
 PORT_TYPE = git
 PORT_URL  = https://github.com/microsoft/MS-DOS
 PORT_REV  = main
-PORT_PATCHES  = fastopen.diff
+PORT_PATCHES  = fastopen.diff fastopen2.diff
 
 !include $(%ROOT)tools/mk/port.mk

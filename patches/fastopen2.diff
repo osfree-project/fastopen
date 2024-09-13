@@ -1,0 +1,113 @@
+diff -urwN fastopen-old/v4.0/src/cmd/fastopen/fastinit.asm fastopen/v4.0/src/cmd/fastopen/fastinit.asm
+--- fastopen-old/v4.0/src/cmd/fastopen/fastinit.asm	2024-09-13 08:13:50.117317327 +0000
++++ fastopen/v4.0/src/cmd/fastopen/fastinit.asm	2024-09-13 09:00:23.460820782 +0000
+@@ -139,7 +139,7 @@
+ 
+ INCLUDE    fastsegs.inc 									   ;AN000;
+ INCLUDE    fastopen.inc 									   ;AN000;
+-INCLUDE    SYSCALL.INC ;									   ;AN000;
++INCLUDE    syscall.inc ;									   ;AN000;
+ 
+ ;-----------------------------------------------------------------------
+ ;		       EQUATES
+diff -urwN fastopen-old/v4.0/src/cmd/fastopen/fastopen.asm fastopen/v4.0/src/cmd/fastopen/fastopen.asm
+--- fastopen-old/v4.0/src/cmd/fastopen/fastopen.asm	2024-09-13 08:13:50.117317327 +0000
++++ fastopen/v4.0/src/cmd/fastopen/fastopen.asm	2024-09-13 09:00:23.460820782 +0000
+@@ -26,7 +26,7 @@
+ .xcref
+ .xlist
+ debug=0 		   ; an equate only for DOSMAC.inc				     ;AN000;
+-INCLUDE  DOSMAC.inc										    ;AN000;
++INCLUDE  dosmac.inc										    ;AN000;
+ .list
+ .cref
+ INCLUDE  dirent.inc										    ;AN000;
+diff -urwN fastopen-old/v4.0/src/cmd/fastopen/fastp.asm fastopen/v4.0/src/cmd/fastopen/fastp.asm
+--- fastopen-old/v4.0/src/cmd/fastopen/fastp.asm	2024-09-13 08:13:50.117317327 +0000
++++ fastopen/v4.0/src/cmd/fastopen/fastp.asm	2024-09-13 09:00:23.460820782 +0000
+@@ -126,6 +126,6 @@
+ 	    %OUT    COMPONENT=fastopen, SUBCOMPONENT=PARSE, MODULE=PARSE.ASM...
+ 	    %OUT    COMPONENT=fastopen, SUBCOMPONENT=PARSE, MODULE=PSDATA.INC...
+ 	ENDIF				;					;AN000;
+-	INCLUDE PARSE.ASM		;					;AN000;
++	INCLUDE parse.asm		;					;AN000;
+ CSEG_INIT  ENDS 			   ;
+ 	END				;					;AN000;
+diff -urwN fastopen-old/v4.0/src/cmd/fastopen/fastseek.asm fastopen/v4.0/src/cmd/fastopen/fastseek.asm
+--- fastopen-old/v4.0/src/cmd/fastopen/fastseek.asm	2024-09-13 08:13:50.121317279 +0000
++++ fastopen/v4.0/src/cmd/fastopen/fastseek.asm	2024-09-13 09:00:23.464820737 +0000
+@@ -7,7 +7,7 @@
+ .xcref
+ .xlist
+ debug=0 		  ;this is an equate only for DOSMAC.inc
+-INCLUDE DOSMAC.inc
++INCLUDE dosmac.inc
+ .list
+ .cref
+ INCLUDE dirent.inc
+diff -urwN fastopen-old/v4.0/src/cmd/fastopen/fastsm.asm fastopen/v4.0/src/cmd/fastopen/fastsm.asm
+--- fastopen-old/v4.0/src/cmd/fastopen/fastsm.asm	2024-09-13 08:13:50.121317279 +0000
++++ fastopen/v4.0/src/cmd/fastopen/fastsm.asm	2024-09-13 09:00:23.464820737 +0000
+@@ -105,7 +105,7 @@
+ 	PAGE				;;					;AN000;
+ 	ENDM				;;					;AN000;
+ ; =  =	=  =  =  =  =  =  =  =	=  =
+-	INCLUDE SYSMSG.INC		;PERMIT SYSTEM MESSAGE HANDLER DEFINITION ;AN000;
++	INCLUDE sysmsg.inc		;PERMIT SYSTEM MESSAGE HANDLER DEFINITION ;AN000;
+ 	MSG_UTILNAME <fastopen> 	;IDENTIFY THE COMPONENT 		;AN000;
+ ; =  =	=  =  =  =  =  =  =  =	=  =
+ 	HEADER	<DEFINITION OF MESSAGES> ;					;AN000;
+@@ -116,7 +116,7 @@
+ 
+ 	   PUBLIC COPYRIGHT	   ;						;AN000;
+ COPYRIGHT  DB	 "MS DOS FASTOPEN Utility " ;                 ;AN000;
+-	   INCLUDE COPYRIGH.INC    ;						;AN000;
++	   INCLUDE copyrigh.inc    ;						;AN000;
+ 	   HEADER <MESSAGE DATA AREAS> ;					;AN000;
+ 	   MSG_SERVICES <MSGDATA>  ;WORKAREAS FOR SYSTEM MESSAGE HANDLER	;AN000;
+ ; =  =	=  =  =  =  =  =  =  =	=  =
+@@ -125,7 +125,7 @@
+ 	   PUBLIC SYSDISPMSG	   ;						;AN000;
+ 
+ 
+-	MSG_SERVICES <FASTOPEN.CLA,FASTOPEN.CL1,FASTOPEN.CL2> ;
++	MSG_SERVICES <fastopen.cla,fastopen.cl1,fastopen.cl2> ;
+ 
+ 				   ;DEFAULT=CHECK DOS VERSION
+ 				   ;DEFAULT=NEARmsg
+diff -urwN fastopen-old/v4.0/src/inc/msgserv.asm fastopen/v4.0/src/inc/msgserv.asm
+--- fastopen-old/v4.0/src/inc/msgserv.asm	2024-09-13 08:13:50.141317043 +0000
++++ fastopen/v4.0/src/inc/msgserv.asm	2024-09-13 09:00:23.464820737 +0000
+@@ -196,7 +196,7 @@
+ ENDIF							     ;;AN000;;
+       $M_RES_ADDRS <>					     ;;AN000;; Resident addresses
+ 							     ;;
+-      include COPYRIGH.INC				     ;;AN001;; Include Copyright 1988 Microsoft
++      include copyrigh.inc				     ;;AN001;; Include Copyright 1988 Microsoft
+ 							     ;;
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+     ENDIF						     ;;AN000;; END of include of Data table
+diff -urwN fastopen-old/v4.0/src/inc/sysmsg.inc fastopen/v4.0/src/inc/sysmsg.inc
+--- fastopen-old/v4.0/src/inc/sysmsg.inc	2024-09-13 08:13:50.141317043 +0000
++++ fastopen/v4.0/src/inc/sysmsg.inc	2024-09-13 09:05:26.233336276 +0000
+@@ -279,9 +279,9 @@
+ 				       ;
+ MSG_UTILNAME  Macro   utilname	       ;
+ 				       ;
+-   INCLUDE &utilname.CTL	       ;  Include the control file for the utility
++   INCLUDE &utilname.ctl	       ;  Include the control file for the utility
+    $M_STRUC = TRUE		       ;
+-   INCLUDE MSGSERV.ASM		       ;  Get structure definitions
++   INCLUDE msgserv.asm		       ;  Get structure definitions
+ 				       ;
+ ENDM				       ;
+ 				       ;
+@@ -326,7 +326,7 @@
+    ENDM 				  ;  NEXT variable
+ 					  ;
+    IF $M_SERVICE			  ;	IF it any services were requested THEN
+-     INCLUDE MSGSERV.ASM		  ;	   THEN include module to get service
++     INCLUDE msgserv.asm		  ;	   THEN include module to get service
+    ENDIF				  ;	ENDIF
+ 
+ ENDM
