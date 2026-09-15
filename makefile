@@ -3,18 +3,16 @@
 # (c) osFree project,
 #
 
-PROJ = fastopen
-TRGT = $(PROJ).exe
 DESC = File cache
 #defines object file names in format $(p)objname$(e)
-srcfiles = $(p)fastopen$(e) $(p)fastseek$(e) $(p)fastinit$(e) $(p)fastp$(e) $(p)fastsm$(e)
+SOURCES = fastopen fastseek fastinit fastp fastsm
 # defines additional options for C compiler
 #STUB     = $(FILESDIR)$(SEP)os2$(SEP)mdos$(SEP)$(PROJ).exe
 UNI2H = 0
 JWASM = 1
+TARGET_API = DOS
 
-
-!include $(%ROOT)tools/mk/appsdos.mk
+!include $(%ROOT)tools/mk/build.mk
 !include $(MYDIR)fastopen.mk
 
 ADD_COPT = -i=$(PORT_BASE)v4.0$(SEP)src$(SEP)h
